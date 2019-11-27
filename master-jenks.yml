@@ -1,0 +1,17 @@
+version: '2'
+
+services:
+  jenkins:
+    build: 
+      context: .
+    volumes:
+      - data_dock1:/etc/jenk1
+      #- data_dock:/etc/foo/baz:ro 
+    ports:
+      - 8080:8080
+    command:
+          
+
+volumes:
+  data_dock1:
+
