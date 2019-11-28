@@ -21,7 +21,7 @@ if [[ -z $3 ]]; then
 fi
 
 if [[ ! -f jenkins-cli.jar ]]; then
-    wget --quiet $1/jnlpJars/jenkins-cli.jar
+    wget $1/jnlpJars/jenkins-cli.jar
 fi
 
 cat << EOF | java -jar jenkins-cli.jar -s $1 -auth $3 create-node $2
