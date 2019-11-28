@@ -1,0 +1,16 @@
+FROM ubuntu
+RUN apt-get update && \
+    apt-get install -y openjdk-8-jdk && \
+    apt-get install -y ant && \
+    apt-get clean && \
+    apt-get install curl -y && \
+    apt-get install wget -y && \
+    mkdir /usr/tmp
+    
+ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64/
+RUN export=JAVA_HOME
+RUN mkdir /etc/tmp2
+RUN mkdir /root/tmp3
+COPY ./create-node.sh /etc/tmp2/create-node.sh
+COPY ./create.sh /etc/tmp2/create.sh
+RUN chmod +x /etc/tmp2/*

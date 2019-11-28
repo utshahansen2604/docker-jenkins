@@ -1,0 +1,38 @@
+version: '2'
+services:
+#===============Jenkins Master================+#
+  jenkins-master:
+    image: jenkins/jenkins:2.190.1
+    volumes:
+      - master_data:/var/jenkins_home
+    ports:
+      - 8080:8080
+#==============Jenkins Node ==================#
+  jenkins-agent:
+    build:
+      context: .
+      dockerfile: 'dockerfile.agent'
+    volumes:
+      - master_data:/root/tmp3:ro
+    depends_on:
+      - jenkins-master
+      - master-2
+    command:
+      - /bin/bash 
+      - -c
+      - /etc/tmp2/connect.sh
+# ==================Jenkins Master -2 ============#
+  master-2:
+    build:
+      context: .
+      dockerfile: 'dockerfile.tarun'
+    volumes:
+      - master_data:/root/tmp3:ro
+    depends_on:
+      - jenkins-master
+    command:
+      - /bin/bash 
+      - -c
+      - /etc/tmp2/create.sh
+volumes:
+  master_data:
